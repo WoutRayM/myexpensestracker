@@ -1,0 +1,9 @@
+truncate table category;
+insert into category(category.name)
+value('Mobility');
+insert into category(category.name)
+value('Food and drinks');
+insert into category(category.name)
+value('Going out');
+insert into category(category.name)
+value('Electronics');
