@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,22 +15,31 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <style>
+        th a {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-<h1>So you have a new expense eh?</h1>
-    <form action="/newexpense" th:action="@{/newexpense}" th:object="${expense}" method="post">
-        <p>Expense Name: <input type="text" th:field="*{name}" name="expenseName"/></p>
-        <p>Description of Expense: <input type="text" th:field="*{description}"/></p>
-        <p>Category:
-        <select name="categoryId">
-            <option selected disabled>Please select an option</option>
-            <th:block th:each="category: ${allCategories}">
-                <option th:text="${category.getName()}" th:value="${category.getId()}"></option>
-            </th:block>
-        </select></p>
-        <p>Amount: <input type="text" th:field="*{amount}"/></p>
-        <p>Date of purchase: <input type="date" th:field="*{dateOfExpense}"/></p>
-        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
-</form>
+<h1>All your current expenses to date: </h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th th:text="Name" onclick="window.location='/sortallexpensesbyname'"></th>
+        <th th:text="Description" onclick="window.location='/sortallexpensesbydescription'"></th>
+        <th th:text="Amount" onclick="window.location='/sortallexpensesbyamount'"></th>
+        <th th:text="DateOfExpense" onclick="window.location='/sortallexpensesbydateofexpense'"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="expense: ${allExpenses}">
+        <td th:text="${expense.name}"></td>
+        <td th:text="${expense.description}"></td>
+        <td th:text="${expense.amount}"></td>
+        <td th:text="${expense.dateOfExpense}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

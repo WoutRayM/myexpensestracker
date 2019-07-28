@@ -2,6 +2,7 @@ package be.giantoaf.myexpensestracker.model;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,9 +15,11 @@ public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String expenseName;
-    private String expenseDiscription;
-    /*private LocalDate dateOfExpense;*/
+    private String name;
+    private String description;
+    private Double amount;
+    @DateTimeFormat(pattern = "ca-MM-dd")
+    private LocalDate dateOfExpense;
 
     @ManyToOne
     private Category category;
