@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,19 +14,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <style>
-        button a {
-            color: white;
-        }
-    </style>
 </head>
 <body>
-    <h1>Welcome to the homepage</h1>
-    <button type="button" class="btn btn-success"><a th:href="@{/newexpense}">Have a new expense?</a></button>
-    <button type="button" class="btn btn-success"><a th:href="@{/newcategory}">Want to add a new category?</a></button>
-    <button type="button" class="btn btn-info"><a th:href="@{/allexpenses}">All your expenses to date</a></button>
-    <br>
-    <br>
-    <button type="button" class="btn btn-warning"><a th:href="@{/monthlyexpenses}">This months expenses</a></button>
+<table class="table">
+    <thead>
+    <tr>
+        <th th:text="Name"></th>
+        <th th:text="Description"></th>
+        <th th:text="Amount"></th>
+        <th th:text="DateOfExpense"></th>
+        <th th:text="Category"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="expense: ${monthlyexpenses}">
+        <td th:text="${expense.name}"></td>
+        <td th:text="${expense.description}"></td>
+        <td th:text="${expense.amount}"></td>
+        <td th:text="${expense.dateOfExpense}"></td>
+        <td th:text="${expense.getCategory().name}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

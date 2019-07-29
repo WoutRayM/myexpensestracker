@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -30,6 +29,7 @@
         <th th:text="Description" onclick="window.location='/sortallexpensesbydescription'"></th>
         <th th:text="Amount" onclick="window.location='/sortallexpensesbyamount'"></th>
         <th th:text="DateOfExpense" onclick="window.location='/sortallexpensesbydateofexpense'"></th>
+        <th th:text="Category" onclick="window.location='/sortallexpensesbycategory'"></th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +38,7 @@
         <td th:text="${expense.description}"></td>
         <td th:text="${expense.amount}"></td>
         <td th:text="${expense.dateOfExpense}"></td>
+        <td th:text="${expense.getCategory().name}"></td>
     </tr>
     </tbody>
 </table>

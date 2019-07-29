@@ -18,10 +18,11 @@ public class Expense {
     private String name;
     private String description;
     private Double amount;
-    @DateTimeFormat(pattern = "ca-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfExpense;
-
     @ManyToOne
     private Category category;
+    @ManyToOne
+    private User user;
 
 }

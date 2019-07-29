@@ -1,6 +1,6 @@
 package be.giantoaf.myexpensestracker.model;
 
-import lombok.*;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -10,19 +10,21 @@ import java.util.List;
 @Entity
 @Data
 @Accessors(chain = true)
-public class Category {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-
-    @OneToMany(mappedBy = "category")
+    private String username;
+    private String password;
+    @ManyToOne
+    private UserAccessLevel userAccessLevel;
+    @OneToMany(mappedBy = "user")
     private List<Expense> expenses = new ArrayList<>();
 
-    public void addAnExpenseToCategory(Expense expense) {
+    public void addNewExpense(Expense expense) {
         expenses.add(expense);
-        expense.setCategory(this);
+        expense.setUser(this);
     }
 
 }

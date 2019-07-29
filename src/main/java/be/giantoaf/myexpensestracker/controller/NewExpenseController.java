@@ -13,10 +13,12 @@ public class NewExpenseController {
 
     private final ExpenseService expenseService;
     private final CategoryService categoryService;
+    private final AllExpensesController allExpensesController;
 
-    public NewExpenseController(ExpenseService expenseService, CategoryService categoryService) {
+    public NewExpenseController(ExpenseService expenseService, CategoryService categoryService, AllExpensesController allExpensesController) {
         this.expenseService = expenseService;
         this.categoryService = categoryService;
+        this.allExpensesController = allExpensesController;
     }
 
     @GetMapping("/newexpense")

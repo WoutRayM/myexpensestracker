@@ -1,0 +1,7 @@
+truncate table user_access_level;
+insert into user_access_level(access_level_name)
+value('User');
+insert into user_access_level(access_level_name)
+value('Owner');
+insert into user_access_level(access_level_name)
+value('Admin');

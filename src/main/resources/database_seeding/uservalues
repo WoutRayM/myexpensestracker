@@ -1,0 +1,7 @@
+truncate table user;
+insert into user(password, username, user_access_level_id)
+values('Walt', 'Walt', 3);
+insert into user(password, username, user_access_level_id)
+values('Theia', 'Theia', 2);
+insert into user(password, username, user_access_level_id)
+values('Alan', 'Alan', 1);
