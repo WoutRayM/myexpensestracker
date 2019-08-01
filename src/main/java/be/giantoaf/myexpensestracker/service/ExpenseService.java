@@ -68,4 +68,32 @@ public class ExpenseService {
                 .collect(Collectors.toList());
     }
 
+    public Double getLifetimeExpensesTotalAllCategories() {
+        return getAllExpenses()
+                .stream()
+                .mapToDouble(Expense::getAmount)
+                .sum();
+    }
+
+    public Double getLifetimeExpenseAmountForCategory(Long categoryId) {
+        return getAllExpenses()
+                .stream()
+                .filter(expense -> expense.getCategory().getId().equals(categoryId))
+                .mapToDouble(Expense::getAmount)
+                .sum();
+    }
+
+    public Double getLifetimeExpenseAmountForCategoryForThisMonth(Long categoryId) {
+        return getAllExpenses()
+                .stream()
+                .filter(expense -> expense.getCategory().getId().equals(categoryId))
+                .filter(ExpensePredicate.isSameMonthAndYear())
+                .mapToDouble(Expense::getAmount)
+                .sum();
+    }
+
+    public List<Expense> getAllExpensesForCategory(Long categoryId) {
+        return expensesRepository.findAllByCategory_id(categoryId);
+    }
+
 }

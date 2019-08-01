@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <style>
+        button a {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense details</h1>
+    <h2>Please select a category</h2>
+    <form action="/expensedetails" th:action="@{/expensedetails}" th:object="${category}" method="post">
+        <p>Category:
+            <select th:field="*{id}">
+                <div>
+                    <option selected disabled>Please select an option</option>
+                    <th:block th:each="category: ${allCategories}">
+                        <option th:text="${category.getName()}" th:value="${category.getId()}"></option>
+                    </th:block>
+                </div>
+            </select>
+        </p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+    <div th:if="${expensesForThisCategory != null}">
+        <h2>Total expenses for this category:</h2>
+        <p th:text="${totalAmountOfExpensesForCategory}"></p>
+        <h2>Total expenses for this category this month:</h2>
+        <p th:text="${totalAmountOfExpensesForCategoryThisMonth}"></p>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th th:text="Name" onclick="window.location='/sortallexpensesbyname'"></th>
+                <th th:text="Description" onclick="window.location='/sortallexpensesbydescription'"></th>
+                <th th:text="Amount" onclick="window.location='/sortallexpensesbyamount'"></th>
+                <th th:text="DateOfExpense" onclick="window.location='/sortallexpensesbydateofexpense'"></th>
+                <th th:text="Category" onclick="window.location='/sortallexpensesbycategory'"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="expense: ${expensesForThisCategory}">
+                <td th:text="${expense.name}"></td>
+                <td th:text="${expense.description}"></td>
+                <td th:text="${expense.amount}"></td>
+                <td th:text="${expense.dateOfExpense}"></td>
+                <td th:text="${expense.getCategory().name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
