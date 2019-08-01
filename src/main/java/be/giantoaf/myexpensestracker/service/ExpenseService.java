@@ -21,6 +21,10 @@ public class ExpenseService {
         return expensesRepository.findAll();
     }
 
+    public List<Expense> getAllExpensesForCategory(Long categoryId) {
+        return expensesRepository.findAllByCategory_id(categoryId);
+    }
+
     public void saveNewExpense(Expense expense) {
         expensesRepository.save(expense);
     }
@@ -29,7 +33,6 @@ public class ExpenseService {
         return getAllExpenses()
                 .stream()
                 .filter(ExpensePredicate.isSameMonthAndYear())
-                .sorted(Comparator.comparing(Expense::getDateOfExpense))
                 .collect(Collectors.toList());
     }
 
@@ -68,7 +71,7 @@ public class ExpenseService {
                 .collect(Collectors.toList());
     }
 
-    public Double getLifetimeExpensesTotalAllCategories() {
+    public Double getLifetimeExpensesTotalAmountAllCategories() {
         return getAllExpenses()
                 .stream()
                 .mapToDouble(Expense::getAmount)
@@ -90,10 +93,6 @@ public class ExpenseService {
                 .filter(ExpensePredicate.isSameMonthAndYear())
                 .mapToDouble(Expense::getAmount)
                 .sum();
-    }
-
-    public List<Expense> getAllExpensesForCategory(Long categoryId) {
-        return expensesRepository.findAllByCategory_id(categoryId);
     }
 
 }
