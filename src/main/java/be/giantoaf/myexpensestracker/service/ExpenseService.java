@@ -26,38 +26,44 @@ public class ExpenseService {
     }
 
     public List<Expense> getAllThisMonthsExpenses() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .filter(ExpensePredicate.isSameMonthAndYear())
                 .sorted(Comparator.comparing(Expense::getDateOfExpense))
                 .collect(Collectors.toList());
     }
 
     public List<Expense> getAllExpensesSortByName() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .sorted(Comparator.comparing(Expense::getName, String.CASE_INSENSITIVE_ORDER))
                 .collect(Collectors.toList());
     }
 
     public List<Expense> getAllExpensesSortByDescription() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .sorted(Comparator.comparing(Expense::getDescription, String.CASE_INSENSITIVE_ORDER))
                 .collect(Collectors.toList());
     }
 
     public List<Expense> getAllExpensesSortByAmount() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .sorted(Comparator.comparingDouble(Expense::getAmount))
                 .collect(Collectors.toList());
     }
 
     public List<Expense> getAllExpensesSortByDateOfExpense() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .sorted(Comparator.comparing(Expense::getDateOfExpense))
                 .collect(Collectors.toList());
     }
 
     public List<Expense> getAllExpensesSortByCategoryName() {
-        return getAllExpenses().stream()
+        return getAllExpenses()
+                .stream()
                 .sorted(Comparator.comparing(expense -> expense.getCategory().getName()))
                 .collect(Collectors.toList());
     }
