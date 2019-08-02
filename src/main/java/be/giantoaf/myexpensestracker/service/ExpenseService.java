@@ -87,10 +87,8 @@ public class ExpenseService {
     }
 
     public Double getLifetimeExpenseAmountForCategoryForThisMonth(Long categoryId) {
-        return getAllExpenses()
+        return getAllThisMonthsExpenses()
                 .stream()
-                .filter(expense -> expense.getCategory().getId().equals(categoryId))
-                .filter(ExpensePredicate.isSameMonthAndYear())
                 .mapToDouble(Expense::getAmount)
                 .sum();
     }
