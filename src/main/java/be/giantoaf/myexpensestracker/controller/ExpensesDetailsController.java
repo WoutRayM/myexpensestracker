@@ -22,7 +22,7 @@ public class ExpensesDetailsController {
     }
 
     @GetMapping("/expensedetails")
-    public String expensesDetails(Model model) {
+    public String expenseDetails(Model model) {
         model.addAttribute("allCategories", categoryService.getAllCategories());
         model.addAttribute("category", new Category());
         return "expensedetails";

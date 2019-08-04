@@ -21,6 +21,10 @@ public class ExpenseService {
         return expensesRepository.findAll();
     }
 
+    public List<Expense> getAllExpensesFilteredByName(String nameFilter) {
+        return expensesRepository.findAllByNameContaining(nameFilter);
+    }
+
     public List<Expense> getAllExpensesForCategory(Long categoryId) {
         return expensesRepository.findAllByCategory_id(categoryId);
     }
@@ -89,6 +93,7 @@ public class ExpenseService {
     public Double getLifetimeExpenseAmountForCategoryForThisMonth(Long categoryId) {
         return getAllThisMonthsExpenses()
                 .stream()
+                .filter(expense -> expense.getCategory().getId().equals(categoryId))
                 .mapToDouble(Expense::getAmount)
                 .sum();
     }
