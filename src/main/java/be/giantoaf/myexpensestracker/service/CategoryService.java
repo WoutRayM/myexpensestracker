@@ -27,4 +27,8 @@ public class CategoryService {
         return categoryRepository.getOne(id);
     }
 
+    public Category getCategoryByCategoryname(String categoryName) {
+        return categoryRepository.getCategoryByNameEquals(categoryName);
+    }
+
 }
